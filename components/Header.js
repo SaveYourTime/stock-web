@@ -11,7 +11,9 @@ const Header = () => {
       <Navbar>
         <Navbar.Header>
           <Link href="/">
-            <a style={{ padding: '18px 20px', display: 'inline-block' }}>STOCK</a>
+            <a style={{ display: 'flex', alignItems: 'center', height: '100%', padding: '0 20px' }}>
+              <img src="/svg/logo.svg" style={{ width: '30px' }} />
+            </a>
           </Link>
         </Navbar.Header>
         <Navbar.Body>
