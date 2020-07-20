@@ -23,7 +23,7 @@ const Header = () => {
               <ResponsiveNav.Item
                 icon={<Icon icon="line-chart" />}
                 eventKey="hst"
-                renderItem={(item) => <Link href="/">{item}</Link>}
+                renderItem={(item) => <Link href="/hst">{item}</Link>}
               >
                 HST
               </ResponsiveNav.Item>
