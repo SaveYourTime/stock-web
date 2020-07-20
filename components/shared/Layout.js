@@ -1,10 +1,11 @@
+import './layout.less';
 import Header from './Header';
 import Footer from './Footer';
 
 const Layout = ({ children }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+  <div className="layout">
     <Header />
-    <main style={{ flex: 1 }}>{children}</main>
+    <main>{children}</main>
     <Footer />
   </div>
 );

@@ -1,6 +1,6 @@
 import 'rsuite/lib/styles/index.less';
 import App from 'next/app';
-import Layout from '../components/Layout';
+import Layout from '../components/shared/Layout';
 
 class MyApp extends App {
   render() {
