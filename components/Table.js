@@ -80,7 +80,7 @@ const MyTable = ({ date, data }) => {
   };
 
   useEffect(() => {
-    setHeight(window.innerHeight - 116);
+    setHeight(window.innerHeight - 60 - 56 - 30);
   }, []);
 
   return (
@@ -128,7 +128,7 @@ const MyTable = ({ date, data }) => {
         </Column>
         <Column>
           <HeaderCell>產業類別</HeaderCell>
-          <Cell dataKey="category">{(rowData) => rowData.stock.category.name}</Cell>
+          <Cell dataKey="category">{(rowData) => rowData.stock?.category?.name}</Cell>
         </Column>
         <Column>
           <HeaderCell>其他</HeaderCell>
