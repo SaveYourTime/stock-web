@@ -108,11 +108,29 @@ const MyTable = ({ date, data }) => {
         </Column>
         <Column width={70}>
           <HeaderCell>代號</HeaderCell>
-          <Cell dataKey="number">{(rowData) => rowData.stock.number}</Cell>
+          <Cell dataKey="number">
+            {(rowData) => (
+              <a
+                href={`https://goodinfo.tw/StockInfo/StockDetail.asp?STOCK_ID=${rowData.stock.number}`}
+                target="_blank"
+              >
+                {rowData.stock.number}
+              </a>
+            )}
+          </Cell>
         </Column>
         <Column>
           <HeaderCell>名稱</HeaderCell>
-          <Cell dataKey="name">{(rowData) => rowData.stock.name}</Cell>
+          <Cell dataKey="name">
+            {(rowData) => (
+              <a
+                href={`https://www.cmoney.tw/follow/channel/stock-${rowData.stock.number}`}
+                target="_blank"
+              >
+                {rowData.stock.name}
+              </a>
+            )}
+          </Cell>
         </Column>
         <Column width={60} align="center">
           <HeaderCell>成交價</HeaderCell>
