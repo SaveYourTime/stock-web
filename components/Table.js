@@ -2,6 +2,7 @@ import './table.less';
 import { useState, useEffect } from 'react';
 import { Table, Tag, TagGroup, Tooltip, Whisper, Icon } from 'rsuite';
 import ExpandCell from './ExpandCell';
+import { weeks } from '../constants/index';
 
 const { Column, HeaderCell, Cell } = Table;
 
@@ -83,10 +84,12 @@ const MyTable = ({ date, data }) => {
     setHeight(window.innerHeight - 60 - 56 - 30);
   }, []);
 
+  const week = weeks[new Date(date).getDay()];
+
   return (
     <div className="table-wrapper">
       <div className="date">
-        <Icon icon="calendar" /> {date}
+        <Icon icon="calendar" /> {`${date} (${week})`}
       </div>
 
       <Table
