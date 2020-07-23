@@ -109,7 +109,7 @@ const MyTable = ({ date, data }) => {
           <HeaderCell>#</HeaderCell>
           <ExpandCell dataKey="id" expandedRowKeys={expandedRowKeys} onChange={handleExpanded} />
         </Column>
-        <Column width={70}>
+        <Column width={74}>
           <HeaderCell>代號</HeaderCell>
           <Cell dataKey="number">
             {(rowData) => (
