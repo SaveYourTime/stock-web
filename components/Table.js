@@ -7,12 +7,16 @@ import { weeks } from '../constants/index';
 const { Column, HeaderCell, Cell } = Table;
 
 const renderRowExpanded = (rowData) => {
-  const { companyName, name, type, description } = rowData.stock;
+  const { companyName, name, type, description, capital } = rowData.stock;
   const title = `${companyName ?? name} ${type ? `(${type})` : ''}`;
   return (
     <div>
       <h6>{title}</h6>
-      <p>{description}</p>
+      <p>
+        {capital && <small>股本：{capital}</small>}
+        <br />
+        {description}
+      </p>
     </div>
   );
 };
@@ -100,9 +104,10 @@ const MyTable = ({ date, data }) => {
         className="table"
         height={height}
         loading={false}
-        expandedRowKeys={expandedRowKeys}
         data={data}
         onRowClick={(data) => console.log(data)}
+        rowExpandedHeight={120}
+        expandedRowKeys={expandedRowKeys}
         renderRowExpanded={renderRowExpanded}
       >
         <Column width={44} align="center">
