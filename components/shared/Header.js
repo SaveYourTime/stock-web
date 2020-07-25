@@ -1,11 +1,14 @@
 import './header.less';
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Navbar, Icon } from 'rsuite';
 import ResponsiveNav from '@rsuite/responsive-nav';
 
 const Header = () => {
-  const [active, setActive] = useState('hst');
+  const router = useRouter();
+  const { pathname } = router;
+  const [active, setActive] = useState(pathname);
 
   return (
     <header>
@@ -22,14 +25,14 @@ const Header = () => {
             <ResponsiveNav appearance="subtle" activeKey={active} onSelect={setActive}>
               <ResponsiveNav.Item
                 icon={<Icon icon="line-chart" />}
-                eventKey="hst"
+                eventKey="/hst"
                 renderItem={(item) => <Link href="/hst">{item}</Link>}
               >
                 HST
               </ResponsiveNav.Item>
               <ResponsiveNav.Item
                 icon={<Icon icon="bar-chart" />}
-                eventKey="top"
+                eventKey="/top"
                 renderItem={(item) => <Link href="/top">{item}</Link>}
               >
                 TOP
