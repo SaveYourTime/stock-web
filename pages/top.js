@@ -8,7 +8,7 @@ const Top = () => {
 
   const renderTables = () =>
     Object.entries(top).map(([date, data], index) => (
-      <Table key={index.toString()} date={date} data={data} />
+      <Table key={index.toString()} date={date} data={data} top />
     ));
 
   return (

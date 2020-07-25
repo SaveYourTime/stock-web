@@ -32,6 +32,16 @@ const renderPriceChangeRatio = (rowData) => {
   return <span style={{ color }}>{priceChangeRatio}</span>;
 };
 
+const renderCategory = (rowData) => {
+  const { category, subcategory } = rowData.stock;
+  return (
+    <>
+      <small>{category?.name}</small>
+      {category?.name === subcategory?.name ? null : <small>{subcategory?.name}</small>}
+    </>
+  );
+};
+
 const renderTags = (rowData) => {
   const { distribution } = rowData.stock;
   if (!distribution?.lessThan50) return null;
@@ -62,7 +72,7 @@ const renderTags = (rowData) => {
   return <TagGroup>{content}</TagGroup>;
 };
 
-const MyTable = ({ date, data }) => {
+const MyTable = ({ date, data, top = false }) => {
   const [height, setHeight] = useState(600);
   const [expandedRowKeys, setExpandedRowKeys] = useState([]);
 
@@ -82,6 +92,16 @@ const MyTable = ({ date, data }) => {
       nextExpandedRowKeys.push(rowData['id']);
     }
     setExpandedRowKeys(nextExpandedRowKeys);
+  };
+
+  const renderRank = () => {
+    if (!top) return null;
+    return (
+      <Column width={44} align="center">
+        <HeaderCell>排名</HeaderCell>
+        <Cell dataKey="rank">{(rowData) => rowData.rank}</Cell>
+      </Column>
+    );
   };
 
   useEffect(() => {
@@ -114,6 +134,7 @@ const MyTable = ({ date, data }) => {
           <HeaderCell>#</HeaderCell>
           <ExpandCell dataKey="id" expandedRowKeys={expandedRowKeys} onChange={handleExpanded} />
         </Column>
+        {renderRank()}
         <Column width={74}>
           <HeaderCell>代號</HeaderCell>
           <Cell dataKey="number">
@@ -154,7 +175,9 @@ const MyTable = ({ date, data }) => {
         </Column>
         <Column>
           <HeaderCell>產業類別</HeaderCell>
-          <Cell dataKey="category">{(rowData) => rowData.stock?.category?.name}</Cell>
+          <Cell dataKey="category" className="category">
+            {renderCategory}
+          </Cell>
         </Column>
         <Column>
           <HeaderCell>其他</HeaderCell>
