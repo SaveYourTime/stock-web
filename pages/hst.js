@@ -1,5 +1,5 @@
 import './table.less';
-import Head from 'next/head';
+import Layout from '../components/shared/Layout';
 import Table from '../components/Table';
 import useStock from '../hooks/useStock';
 
@@ -12,13 +12,9 @@ const Hst = () => {
     ));
 
   return (
-    <>
-      <Head>
-        <title>HST</title>
-      </Head>
-
+    <Layout title="Stock - HST">
       <section>{renderTables()}</section>
-    </>
+    </Layout>
   );
 };
 
