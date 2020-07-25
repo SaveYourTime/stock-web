@@ -1,0 +1,19 @@
+section {
+  display: flex;
+  overflow-x: overlay;
+}
+
+.table {
+  width: 100vw;
+  min-width: 100vw;
+
+  @media (min-width: 576px) and (max-width: 1200px) {
+    width: 50vw;
+    min-width: 50vw;
+  }
+
+  @media (min-width: 1200px) {
+    width: calc(100vw / 3);
+    min-width: calc(100vw / 3);
+  }
+}

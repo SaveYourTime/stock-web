@@ -1,4 +1,4 @@
-import './hst.less';
+import './table.less';
 import Head from 'next/head';
 import Table from '../components/Table';
 import useStock from '../hooks/useStock';
