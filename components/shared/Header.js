@@ -8,7 +8,7 @@ import ResponsiveNav from '@rsuite/responsive-nav';
 const Header = () => {
   const router = useRouter();
   const { pathname } = router;
-  const [active, setActive] = useState(pathname);
+  const [active, setActive] = useState(pathname === '/' ? '/hst' : pathname);
 
   return (
     <header>
