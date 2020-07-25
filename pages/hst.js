@@ -1,19 +1,10 @@
 import './hst.less';
-import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Table from '../components/Table';
-import api from '../apis';
+import useStock from '../hooks/useStock';
 
 const Hst = () => {
-  const [hst, setHst] = useState({});
-
-  useEffect(() => {
-    api
-      .get('/stocks/hst')
-      .then((res) => res.data)
-      .then(setHst)
-      .catch((err) => console.log(err));
-  }, []);
+  const hst = useStock('hst');
 
   const renderTables = () =>
     Object.entries(hst).map(([date, data], index) => (

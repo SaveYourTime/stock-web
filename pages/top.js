@@ -1,15 +1,25 @@
+import './hst.less';
 import Head from 'next/head';
+import Table from '../components/Table';
+import useStock from '../hooks/useStock';
 
-const Top = () => (
-  <>
-    <Head>
-      <title>TOP</title>
-    </Head>
+const Top = () => {
+  const top = useStock('top');
 
-    <section>
-      <h6>Work in progress...</h6>
-    </section>
-  </>
-);
+  const renderTables = () =>
+    Object.entries(top).map(([date, data], index) => (
+      <Table key={index.toString()} date={date} data={data} />
+    ));
+
+  return (
+    <>
+      <Head>
+        <title>TOP</title>
+      </Head>
+
+      <section>{renderTables()}</section>
+    </>
+  );
+};
 
 export default Top;
