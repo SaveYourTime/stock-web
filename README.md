@@ -1,30 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# stock-web
 
-## Getting Started
+A web crawler for daily fetching stock data from Goodinfo!台灣股市資訊網 and CMoney 股市爆料同學會, which are either hit a historical high or at Top 50 of the trading volume.
 
-First, run the development server:
+![image](https://i.imgur.com/vrFnMPD.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Link
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Here is a working live link: https://stock.codetorich.com
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Technologies
 
-## Learn More
+- Front-End: React.js, Redux, Next.js, Less, React Suite
+- Backend: Node.js, Express.js, Nest.js, TypeScript, MySQL, AWS (Elastic Beanstalk, EC2, RDS, Route53)
+- Tools: Docker, ESLint, Prettier, Puppeteer, Swagger UI
 
-To learn more about Next.js, take a look at the following resources:
+## Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Asynchronous operation with crawling page
+- Setup Cron jobs and using Puppeteer to fetch stock data every day automatically
+- Only fetch stock information if it does not exist in our database
+- Capture Request to abort the unnecessary request (such as images) for better efficiency
