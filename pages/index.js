@@ -1,7 +1,7 @@
 import Hst from './hst';
 
-const Home = () => {
+function Home() {
   return <Hst />;
-};
+}
 
 export default Home;

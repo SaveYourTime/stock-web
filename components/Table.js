@@ -46,7 +46,7 @@ const renderTags = (rowData) => {
   const { distribution } = rowData.stock;
   if (!distribution?.lessThan50) return null;
 
-  let color = '';
+  let color = null;
   let tips = `(${distribution.date})`;
 
   if (distribution.lessThan50 >= 30) {
