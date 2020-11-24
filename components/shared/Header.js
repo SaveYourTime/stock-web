@@ -1,24 +1,22 @@
 import './header.less';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Navbar, Icon } from 'rsuite';
+import { Navbar, Icon, Modal, DateRangePicker } from 'rsuite';
 import ResponsiveNav from '@rsuite/responsive-nav';
+import DateContext from '../../contexts/DateContext';
 
 const Header = () => {
+  const { setDateRange } = useContext(DateContext);
   const router = useRouter();
   const { pathname } = router;
+  const [show, setShow] = useState(false);
   const [active, setActive] = useState(pathname === '/' ? '/hst' : pathname);
-
   return (
     <header>
       <Navbar>
-        <Navbar.Header>
-          <Link href="/">
-            <a className="header" onClick={() => setActive('hst')}>
-              <img src="/svg/logo.svg" />
-            </a>
-          </Link>
+        <Navbar.Header className="header" onClick={() => setShow(true)}>
+          <img src="/svg/logo.svg" />
         </Navbar.Header>
         <Navbar.Body>
           <nav>
@@ -41,6 +39,21 @@ const Header = () => {
           </nav>
         </Navbar.Body>
       </Navbar>
+      <Modal show={show} onHide={() => setShow(false)}>
+        <Modal.Header>
+          <Modal.Title>選擇查詢時間區間</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <DateRangePicker
+            onChange={([start, end]) => setDateRange({ start, end })}
+            hoverRange="week"
+            oneTap
+            cleanable
+            defaultOpen
+            showOneCalendar
+          />
+        </Modal.Body>
+      </Modal>
     </header>
   );
 };
