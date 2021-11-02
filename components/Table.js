@@ -1,8 +1,11 @@
 import './table.less';
 import { useState, useEffect } from 'react';
 import { Table, Tag, TagGroup, Tooltip, Whisper, Icon } from 'rsuite';
+import dayjs from 'dayjs';
 import ExpandCell from './ExpandCell';
 import { weeks } from '../constants/index';
+import FrequencyTable from './FrequencyTable';
+import { getColorByPriceChangeRatio } from '../utils';
 
 const { Column, HeaderCell, Cell } = Table;
 
@@ -23,12 +26,7 @@ const renderRowExpanded = (rowData) => {
 
 const renderPriceChangeRatio = (rowData) => {
   const { priceChangeRatio } = rowData;
-  let color = 'inherit';
-  if (priceChangeRatio > 0) {
-    color = '#f44336';
-  } else if (priceChangeRatio < 0) {
-    color = '#4caf50';
-  }
+  const color = getColorByPriceChangeRatio(priceChangeRatio);
   return <span style={{ color }}>{priceChangeRatio}</span>;
 };
 
@@ -38,6 +36,65 @@ const renderCategory = (rowData) => {
     <>
       <small>{category?.name}</small>
       {category?.name === subcategory?.name ? null : <small>{subcategory?.name}</small>}
+    </>
+  );
+};
+
+const renderFrequency = (rowData) => {
+  const dataOfYear = rowData.previous;
+  if (!dataOfYear || dataOfYear.length === 0) return null;
+  const dataOfLast30Days = rowData.previous?.filter(
+    (data) => dayjs().diff(dayjs(data.date), 'd') <= 31,
+  );
+  const dataOfLast7Days = rowData.previous?.filter(
+    (data) => dayjs().diff(dayjs(data.date), 'd') <= 7,
+  );
+  return (
+    <>
+      <Whisper
+        placement="left"
+        trigger={['hover', 'click']}
+        speaker={
+          <Tooltip>
+            <FrequencyTable items={dataOfLast7Days} />
+          </Tooltip>
+        }
+        enterable
+      >
+        <small>
+          {dataOfLast7Days?.length}／<em>週</em>
+        </small>
+      </Whisper>
+      <br />
+      <Whisper
+        placement="left"
+        trigger="hover"
+        speaker={
+          <Tooltip>
+            <FrequencyTable items={dataOfLast30Days} />
+          </Tooltip>
+        }
+        enterable
+      >
+        <small>
+          {dataOfLast30Days?.length}／<em>月</em>
+        </small>
+      </Whisper>
+      <br />
+      <Whisper
+        placement="left"
+        trigger="hover"
+        speaker={
+          <Tooltip>
+            <FrequencyTable items={dataOfYear} />
+          </Tooltip>
+        }
+        enterable
+      >
+        <small>
+          {dataOfYear?.length}／<em>年</em>
+        </small>
+      </Whisper>
     </>
   );
 };
@@ -179,7 +236,13 @@ const MyTable = ({ date, data, top = false }) => {
             {renderCategory}
           </Cell>
         </Column>
-        <Column>
+        <Column width={68}>
+          <HeaderCell>出現頻率</HeaderCell>
+          <Cell dataKey="frequency" align="right">
+            {renderFrequency}
+          </Cell>
+        </Column>
+        <Column width={70}>
           <HeaderCell>其他</HeaderCell>
           <Cell dataKey="others">{renderTags}</Cell>
         </Column>
